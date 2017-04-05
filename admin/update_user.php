@@ -13,6 +13,11 @@ if ($_SESSION['login'])
 
   require 'lib/admin.php';  
   $_admin = new Admin();  ;
+  require_once 'funcs/auth.php';
+      if($adminVeiwUsers == 0)
+      {
+        header("Location: dashboard.php");
+      }
   $search_by = 'admin_id';
   $value = $id; 
   $admin = $_admin->get_userdata($search_by,$value);

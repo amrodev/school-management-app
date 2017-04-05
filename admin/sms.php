@@ -9,6 +9,12 @@ session_start();
 
 if ($_SESSION['login']) {
 
+      require_once 'funcs/auth.php';
+      if($adminVeiwSMS == 0)
+      {
+        header("Location: dashboard.php");
+      }
+
 
 } else {
     header("Location: index.php");
@@ -52,7 +58,13 @@ require "inc/left_bar.php";
         <div class="col-md-12">
             <div class="row">
 
+                <?php 
+                if($adminAddSMS == 1)
+                {
+                  
                 
+                
+                ?>
 
                 <div class="col-md-6 col-sm-6 col-lg-3">
                 <div class="mini-stat clearfix bx-shadow bg-white">
@@ -100,7 +112,9 @@ require "inc/left_bar.php";
                 </div>
                 </div>
 
-                
+                <?php 
+                }
+                ?>
 
                 
 
@@ -111,7 +125,10 @@ require "inc/left_bar.php";
 
             
 
-
+            <?php 
+            if($adminAddSMS == 1)
+                {
+            ?>
             <form class="cmxform form-horizontal tasi-form" id="manual_sms" name="manual_sms" method="post"
                   enctype="multipart/form-data" action="funcs/sms_settings.php" >
 
@@ -166,7 +183,7 @@ require "inc/left_bar.php";
 
             </form>
 
-            
+<?php }?>            
 
         </div>
 

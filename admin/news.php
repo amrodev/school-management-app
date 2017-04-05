@@ -3,7 +3,11 @@
 session_start();
 
 if ($_SESSION['login']) {
-
+      require_once 'funcs/auth.php';
+      if($adminVeiwNews == 0)
+      {
+        header("Location: dashboard.php");
+      }
 } else {
     header("Location: index.php");
 
@@ -29,7 +33,13 @@ if ($_SESSION['login']) {
         <!-- Start content -->
         <div class="content">
             <div class="container">
-                <a href="add_news.php" class="btn btn-primary waves-effect waves-light btn-lg m-b-5">Add News</a>
+            <?php
+            if($adminAddNews == 1)
+            {
+              echo '<a href="add_news.php" class="btn btn-primary waves-effect waves-light btn-lg m-b-5">Add News</a>';
+            }
+             ?>
+                
                 <br><br>
 
                 <div class="row">
@@ -103,13 +113,21 @@ if ($_SESSION['login']) {
                                                                 echo '</td><td>';
                                                                 echo $all_news[$i]['long_description_english'];
                                                                 echo '</td><td class="actions">';
-                                                                echo '<a href="edit_news.php?news_name=' . $enc_id . '">
-                                  <i class="fa fa-pencil"></i>
-                                  </a>
-                                  <a href="funcs/news_functions.php?news_name_del=' . $enc_id . '" >
+                                                                if($adminEditNews == 1)
+                                                                {
+                                                                    echo '<a href="edit_news.php?news_name=' . $enc_id . '">
+                                                                          <i class="fa fa-pencil"></i>
+                                                                          </a>';
+                                                                }
+                                                                if($adminDeleteNews == 1)
+                                                                {
+                                                                    echo '<a href="funcs/news_functions.php?news_name_del=' . $enc_id . '" >
                                   <i class="fa fa-trash-o"></i>
-                                  </a>
-                                  </td>
+                                  </a>';
+                                                                }
+                                                                
+                                  
+                                  echo '</td>
                                   </tr>';
                                                             }
                                                             ?>

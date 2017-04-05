@@ -4,7 +4,11 @@ session_start();
 
 if ($_SESSION['login']) 
 {
-     
+     require_once 'funcs/auth.php';
+      if($adminVeiwWD == 0)
+      {
+        header("Location: dashboard.php");
+      }
      
 }
 else{
@@ -110,12 +114,20 @@ else{
                             <input class="form-control" id="instgram_url" name="instgram_url" type="text" required="" aria-required="true" value="<?php echo $params[9]['content']; ?>"></div>
                         </div>
 
+                        <?php 
+                        if($adminEditWD == 1)
+                        {
+                          
+                       
+                        ?>
+
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
                                     <button class="btn btn-success waves-effect waves-light" type="submit" id="website_data" name="website_data">Save</button>
                                      <button class="btn btn-default waves-effect" type="cancel">Cancel</button>
                                  </div>
                              </div>
+                             <?php } ?>
                          </form>
                      </div>
                  </div>

@@ -3,6 +3,12 @@
 session_start();
 
 if ($_SESSION['login']) {
+
+  require_once 'funcs/auth.php';
+      if($adminVeiwSet == 0  && $adminEditSet == 0)
+      {
+        header("Location: dashboard.php");
+      }
   
 }
 else{

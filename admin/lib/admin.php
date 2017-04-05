@@ -10,6 +10,8 @@
     public $table_nameST_Classes = 'classes';
     public $table_namePA = 'parents';
     public $table_nameTE = 'teacherstable';
+    public $table_nameFN   = 'fn_name';
+    public $table_nameUP   = 'users_privileges';
 
 
   	public function Check_Connection(){
@@ -18,6 +20,17 @@
        // return 1 if ture 0 of false
       //mysql_query("SET NAMES 'utf8'", $this->con);
   		return $this->con_state;
+  	}
+
+
+    public function get_allFn()
+  	{
+  		$this->con_state = $this->Check_Connection();
+  		if ($this->con_state) {
+  			$db = new Database();
+  		    $r= $db->get_all($this->table_nameFN);  		    
+  		}
+      return $r;
   	}
 
   	public function get_all()
@@ -110,6 +123,23 @@
         {
           $db = new Database();
           $userdata= $db->get_one_record($this->table_name,$search_by,$value);
+        }
+        else {
+          echo 'Sorry Connection was lost';
+        }
+        return $userdata;
+        //var_dump($userdata);
+    }
+
+    public function get_UPData($search_by,$value)
+    {
+
+        $this->con_state = $this->Check_Connection();
+        $userdata = array();
+        if ($this->con_state) 
+        {
+          $db = new Database();
+          $userdata= $db->get_one_record($this->table_nameUP,$search_by,$value);
         }
         else {
           echo 'Sorry Connection was lost';
@@ -291,6 +321,23 @@
         }
     }
 
+    public function saveUP($id,$userId,$fnId,$view,$add,$edit,$delete)
+  	{
+        $message ='';
+  	    $this->con_state = $this->Check_Connection();
+  		  if ($this->con_state) {
+  			$db = new Database();
+  		    if($id == NULL){ // Insert
+              $fields = "(userId,fnId,_view,_add,_edit,_delete)";
+  		    	  $values = "( '".$userId."' , '".$fnId."' , '".$view."' , '".$add."' , '".$edit."' , '".$delete."' )";
+              $db->insert($this->table_nameUP , $fields , $values );
+              $message = 'User Privileges added Successful';
+  		    } 
+  		   	    
+  		}
+      return $message;  		
+  	}
+
     public function save($id,$username,$english_name,$arabic_name,$password1,$email,$level)
   	{
         $message ='';
@@ -347,6 +394,19 @@
         {
           $_db = new Database();
           $_db->update($this->table_nameST,$fileds,$values,$counter,$select,$id);
+        } 
+         
+        return $message;      
+    }
+
+    public function update_userUP($fileds,$values,$counter,$select,$id)
+    {
+        $message ='';
+        $this->con_state = $this->Check_Connection();
+        if ($this->con_state) 
+        {
+          $_db = new Database();
+          $_db->update($this->table_nameUP,$fileds,$values,$counter,$select,$id);
         } 
          
         return $message;      

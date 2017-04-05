@@ -7,6 +7,11 @@ if ($_SESSION['login'])
   require 'lib/banners.php';
   $_ban = new Banners();
   $banners = $_ban->get_all();
+      require_once 'funcs/auth.php';
+      if($adminVeiwBan == 0)
+      {
+        header("Location: dashboard.php");
+      }
 }
 else{
   header("Location: index.php");

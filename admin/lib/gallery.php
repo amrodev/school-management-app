@@ -183,6 +183,18 @@
         return $message;      
     }
 
+     public function updatePhoto($fileds,$values,$counter,$select,$id)
+    {
+        $message ='';
+        $this->con_state = $this->connect();
+        if ($this->con_state) 
+        {
+          $_db = new Database();
+          $_db->update($this->table_name2,$fileds,$values,$counter,$select,$id);
+        } 
+        return $message;      
+    }
+
   	
     
   } 

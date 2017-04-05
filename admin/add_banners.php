@@ -4,7 +4,11 @@ session_start();
 
 if ($_SESSION['login']) 
 {
-  
+      require_once 'funcs/auth.php';
+      if($adminVeiwBan == 0 && $adminAddBan == 0)
+      {
+        header("Location: dashboard.php");
+      }
 }
 else{
   header("Location: index.php");

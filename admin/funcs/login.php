@@ -44,11 +44,13 @@ if( !empty($_POST['username']) && !empty($_POST['password']))
 	    	
 	    	$_SESSION['login']                   = true;
 	    	$_SESSION['admin_id']                = $user_data[0]['admin_id'];
+			$_SESSION['AdminID']                 = $user_data[0]['admin_id'];
 			$_SESSION['admin_username']          = $user_data[0]['admin_username'];
 			$_SESSION['admin_email']             = $user_data[0]['admin_email'];
 			$_SESSION['admin_level']             = $user_data[0]['level'];
 			$_SESSION['admin_arabic_name']       = $user_data[0]['arabic_name'];
 			$_SESSION['admin_english_name']      = $user_data[0]['english_name'];
+			
 
 			$_param  = new Params();
 			$sms_counter =$_param->get_data('type','sms_counter');
