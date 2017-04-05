@@ -3,6 +3,11 @@
 session_start();
 
 if ($_SESSION['login']) {
+    require_once 'funcs/auth.php';
+      if($adminVeiwJob == 0)
+      {
+        header("Location: dashboard.php");
+      }
 
 } else {
     header("Location: index.php");
@@ -29,8 +34,14 @@ if ($_SESSION['login']) {
         <!-- Start content -->
         <div class="content">
             <div class="container">
-                <a href="jobs_edit.php" class="btn btn-primary waves-effect waves-light btn-lg m-b-5"><i
-                        class="md md-my-library-add"></i> Add Job</a>
+            <?php
+            if($adminAddJob == 1)
+            {
+              echo '<a href="jobs_edit.php" class="btn btn-primary waves-effect waves-light btn-lg m-b-5"><i
+                        class="md md-my-library-add"></i> Add Job</a>';
+            }
+            ?>
+                
                 <br><br>
                 <!-- Page-Title -->
                 <div class="row">
@@ -105,13 +116,19 @@ if ($_SESSION['login']) {
                                                                     echo '</td><td>';
                                                                     echo $all_jobs[$i]['long_description_english'];
                                                                     echo '</td><td class="actions">';
-                                                                    echo '<a href="edit_jobs.php?job_name=' . $enc_id . '">
+                                                                    if($adminEditJob == 1){
+                                                                       echo '<a href="edit_jobs.php?job_name=' . $enc_id . '">
                                   <i class="fa fa-pencil"></i>
-                                  </a>
-                                  <a href="funcs/jobs_functions.php?job_name=' . $enc_id . '" >
+                                  </a>';
+                                                                    }
+                                                                    if($adminDeleteJob == 1){
+                                                                        echo ' <a href="funcs/jobs_functions.php?job_name=' . $enc_id . '" >
                                   <i class="fa fa-trash-o"></i>
-                                  </a>
-                                  </td>
+                                  </a>';       
+                                                                    }
+                                                                    
+                                 
+                                 echo ' </td>
                                   </tr>';
                                                                 }
                                                             }

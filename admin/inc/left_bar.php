@@ -32,7 +32,7 @@
                                   $level = 'Super Admin';
                                   break;
                                 case '2':
-                                  $level = 'Website Admin';
+                                  $level = 'Admin';
                                   break;
                                 case '3':
                                   $level = 'Student';
@@ -57,9 +57,10 @@
                                 <i class="md md-home"></i><span>Dashboard</span></a>
                         </li>
                         <?php
-                        //( ! ) Notice: Undefined variable: level in C:\wamp\www\salam academy\admin\inc\left_bar.php on line 34
+                        
 
                         $level = $_SESSION['admin_level'];
+                        
                           switch ($level) {
                                
                                case '0':
@@ -141,129 +142,209 @@
                                    break;
 
                                case '1':
-                                   echo '<li>
-                                         <a href="edit_users.php" class="waves-effect">
-                                         <i class="md ion-android-social-user"></i>
-                                         <span>Users</span></a>
-                                         </li>';
-                                         echo '<li>
-                                         <a href="sms.php" class="waves-effect">
-                                         <i class="md ion-android-social-user"></i>
-                                         <span>SMS</span></a>
-                                         </li>';
-                                         echo '<li>
-                                         <a href="banners2.php" class="waves-effect">
-                                         <i class="md ion-images"></i>
-                                         <span>Banners</span></a>
-                                         </li>';
-                                         echo '<li>
-                                         <a href="mailbox.php" class="waves-effect">
-                                         <i class="md ion-android-mail"></i>
-                                         <span>Mailbox</span></a>
-                                         </li>';
-                                         echo '<li>
+                                        if($_SESSION['UsersVeiw'] == 1){
+                                             echo '<li>
+                                                <a href="edit_users.php" class="waves-effect">
+                                                <i class="md ion-android-social-user"></i>
+                                                <span>Users</span></a>
+                                                </li>';
+                                        }
+                                        if($_SESSION['SMSVeiw'] == 1){
+                                            echo '<li>
+                                           <a href="sms.php" class="waves-effect">
+                                           <i class="md ion-android-social-user"></i>
+                                           <span>SMS</span></a>
+                                           </li>';                                             
+                                        }
+                                        if($_SESSION['BanVeiw'] == 1){
+                                             echo '<li>
+                                            <a href="banners2.php" class="waves-effect">
+                                            <i class="md ion-images"></i>
+                                            <span>Banners</span></a>
+                                            </li>';
+                                        }
+                                        if($_SESSION['MailVeiw'] == 1){
+                                            echo '<li>
+                                             <a href="mailbox.php" class="waves-effect">
+                                             <i class="md ion-android-mail"></i>
+                                             <span>Mailbox</span></a>
+                                             </li>';
+                                        }
+                                        if($_SESSION['SecVeiw'] == 1){
+                                             echo '<li>
                                                 <a href="Sections.php" class="waves-effect">
                                                <i class=" md-view-list"></i>
                                                <span>Sections</span></a>
                                               </li>';
-
-
-                                        echo '<li> 
-                                         <a href="edit_FAQ.php" class="waves-effect">
-                                         <i class="md-border-color"></i>
-                                          <span>FAQ</span></a>
-                                            </li>';
-                                         echo '<li>
-                                         <a href="website_data.php" class="waves-effect">
-                                         <i class="md  md-web"></i>
-                                         <span>Website Data</span></a>
-                                         </li>';
-                                         echo '<li>
-                                         <a href="jobs.php" class="waves-effect">
-                                         <i class="md  ion-android-social"></i>
-                                         <span>jobs</span></a>
-                                         </li>';
-                                         
-                                         echo '<li>
+                                        }
+                                        if($_SESSION['FAQVeiw'] == 1){
+                                            echo '<li> 
+                                             <a href="edit_FAQ.php" class="waves-effect">
+                                             <i class="md-border-color"></i>
+                                             <span>FAQ</span></a>
+                                             </li>';
+                                        }
+                                        if($_SESSION['WDVeiw'] == 1){
+                                           echo '<li>
+                                             <a href="website_data.php" class="waves-effect">
+                                             <i class="md  md-web"></i>
+                                             <span>Website Data</span></a>
+                                             </li>';
+                                        }
+                                        if($_SESSION['JobVeiw'] == 1){
+                                             echo '<li>
+                                             <a href="jobs.php" class="waves-effect">
+                                             <i class="md  ion-android-social"></i>
+                                             <span>jobs</span></a>
+                                             </li>'; 
+                                        }
+                                        if($_SESSION['EveVeiw'] == 1){
+                                             echo '<li>
                                          <a href="ads_news.php" class="waves-effect">
                                          <i class="md  md-leak-add"></i>
                                          <span>Events</span></a>
                                          </li>';
-
-                                         echo '<li>
-                                         <a href="news.php" class="waves-effect">
-                                         <i class="md  md-leak-add"></i>
-                                         <span>News</span></a>
-                                         </li>';
-
-                                         echo '<li>
+                                        }
+                                        if($_SESSION['NewsVeiw'] == 1){
+                                            echo '<li>
+                                            <a href="news.php" class="waves-effect">
+                                            <i class="md  md-leak-add"></i>
+                                             <span>News</span></a>
+                                             </li>';
+                                        }
+                                        if($_SESSION['GalVeiw'] == 1){
+                                                   echo '<li>
                                          <a href="gallery.php" class="waves-effect">
                                          <i class="md  md-image"></i>
                                          <span>Gallery</span></a>
                                          </li>';
-                                         echo '<li>
+                                        }
+                                        if($_SESSION['VidVeiw'] == 1){
+                                           echo '<li>
                                          <a href="videos.php" class="waves-effect">
                                          <i class="md  md-play-circle-fill"></i>
                                          <span>Videos</span></a>
                                          </li>';
-                                         echo '<li>
+                                        }
+                                        if($_SESSION['RepVeiw'] == 1){
+                                             echo '<li>
                                          <a href="reports.php" class="waves-effect">
                                          <i class="md  md-report"></i>
                                          <span>Reports</span></a>
                                          </li>';
-                                         echo '<li>
+                                        }
+                                        if($_SESSION['SetVeiw'] == 1){
+                                              echo '<li>
                                          <a href="settings.php" class="waves-effect">
                                          <i class="md md-settings"></i>
                                          <span>Settings </span></a>
                                          </li>';
+                                        }
                                    break;
                                
                                case '2':                                         
-                                         echo '<li>
-                                         <a href="index.html" class="waves-effect">
-                                         <i class="md ion-images"></i>
-                                         <span>Banners</span></a>
-                                         </li>';
-                                         echo '<li>
-                                         <a href="index.html" class="waves-effect">
-                                         <i class="md  md-web"></i>
-                                         <span>Website Data</span></a>
-                                         </li>';
-                                         echo '<li>
-                                         <a href="index.html" class="waves-effect">
-                                         <i class="md  ion-android-social"></i>
-                                         <span>jobs</span></a>
-                                         </li>';
-                                         echo '<li>
-                                         <a href="index.html" class="waves-effect">
-                                         <i class="md   md-message"></i>
-                                         <span>Received Messages</span></a>
-                                         </li>';
-                                         echo '<li>
-                                         <a href="index.html" class="waves-effect">
+                                        if($_SESSION['UsersVeiw'] == 1){
+                                             echo '<li>
+                                                <a href="edit_users.php" class="waves-effect">
+                                                <i class="md ion-android-social-user"></i>
+                                                <span>Users</span></a>
+                                                </li>';
+                                        }
+                                        if($_SESSION['SMSVeiw'] == 1){
+                                            echo '<li>
+                                           <a href="sms.php" class="waves-effect">
+                                           <i class="md ion-android-social-user"></i>
+                                           <span>SMS</span></a>
+                                           </li>';                                             
+                                        }
+                                        if($_SESSION['BanVeiw'] == 1){
+                                             echo '<li>
+                                            <a href="banners2.php" class="waves-effect">
+                                            <i class="md ion-images"></i>
+                                            <span>Banners</span></a>
+                                            </li>';
+                                        }
+                                        if($_SESSION['MailVeiw'] == 1){
+                                            echo '<li>
+                                             <a href="mailbox.php" class="waves-effect">
+                                             <i class="md ion-android-mail"></i>
+                                             <span>Mailbox</span></a>
+                                             </li>';
+                                        }
+                                        if($_SESSION['SecVeiw'] == 1){
+                                             echo '<li>
+                                                <a href="Sections.php" class="waves-effect">
+                                               <i class=" md-view-list"></i>
+                                               <span>Sections</span></a>
+                                              </li>';
+                                        }
+                                        if($_SESSION['FAQVeiw'] == 1){
+                                            echo '<li> 
+                                             <a href="edit_FAQ.php" class="waves-effect">
+                                             <i class="md-border-color"></i>
+                                             <span>FAQ</span></a>
+                                             </li>';
+                                        }
+                                        if($_SESSION['WDVeiw'] == 1){
+                                           echo '<li>
+                                             <a href="website_data.php" class="waves-effect">
+                                             <i class="md  md-web"></i>
+                                             <span>Website Data</span></a>
+                                             </li>';
+                                        }
+                                        if($_SESSION['JobVeiw'] == 1){
+                                             echo '<li>
+                                             <a href="jobs.php" class="waves-effect">
+                                             <i class="md  ion-android-social"></i>
+                                             <span>jobs</span></a>
+                                             </li>'; 
+                                        }
+                                        if($_SESSION['EveVeiw'] == 1){
+                                             echo '<li>
+                                         <a href="ads_news.php" class="waves-effect">
                                          <i class="md  md-leak-add"></i>
                                          <span>Events</span></a>
                                          </li>';
-                                         echo '<li>
-                                         <a href="news.php" class="waves-effect">
-                                         <i class="md  md-leak-add"></i>
-                                         <span>News</span></a>
-                                         </li>';
-                                         echo '<li>
-                                         <a href="index.html" class="waves-effect">
+                                        }
+                                        if($_SESSION['NewsVeiw'] == 1){
+                                            echo '<li>
+                                            <a href="news.php" class="waves-effect">
+                                            <i class="md  md-leak-add"></i>
+                                             <span>News</span></a>
+                                             </li>';
+                                        }
+                                        if($_SESSION['GalVeiw'] == 1){
+                                                   echo '<li>
+                                         <a href="gallery.php" class="waves-effect">
                                          <i class="md  md-image"></i>
                                          <span>Gallery</span></a>
                                          </li>';
-                                         echo '<li>
-                                         <a href="index.html" class="waves-effect">
+                                        }
+                                        if($_SESSION['VidVeiw'] == 1){
+                                           echo '<li>
+                                         <a href="videos.php" class="waves-effect">
                                          <i class="md  md-play-circle-fill"></i>
-                                         <span>Vedios</span></a>
+                                         <span>Videos</span></a>
                                          </li>';
-                                         echo '<li>
-                                         <a href="index.html" class="waves-effect">
+                                        }
+                                        if($_SESSION['RepVeiw'] == 1){
+                                             echo '<li>
+                                         <a href="reports.php" class="waves-effect">
+                                         <i class="md  md-report"></i>
+                                         <span>Reports</span></a>
+                                         </li>';
+                                        }
+                                        if($_SESSION['SetVeiw'] == 1){
+                                              echo '<li>
+                                         <a href="settings.php" class="waves-effect">
                                          <i class="md md-settings"></i>
-                                         <span>Website Settings </span></a>
+                                         <span>Settings </span></a>
                                          </li>';
+                                        }
+                                         
+                                         
+                                        
+                                        
                                    break;
 
                                    case '3':                                         

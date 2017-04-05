@@ -291,6 +291,67 @@ else{
    
    header("Location: ../edit_users.php");   
  }
+
+  if (isset($_POST['user_UP']))
+  {
+    $_enc   = new Encryption();
+    $_admin = new Admin();
+    
+    $fns    = $_admin->get_allFn();
+    $admin_id = $_GET['u'];
+    $UP  = $_admin->get_UPData('userId',$admin_id);
+    if(count($UP) == 0)
+    {
+        for ($i=0; $i <count($fns) ; $i++) 
+        { 
+            $id = null;
+            $userId = $admin_id;
+            $fnId   = $fns[$i]['id'];
+            $v      = 'V'.$fns[$i]['name'];
+            $a      = 'A'.$fns[$i]['name'];
+            $e      = 'E'.$fns[$i]['name'];
+            $d      = 'D'.$fns[$i]['name'];
+            $view   = isset($_POST[$v]);
+            $add    = isset($_POST[$a]);
+            $edit   = isset($_POST[$e]);
+            $delete = isset($_POST[$d]);
+            $_admin->saveUP($id,$userId,$fnId,$view,$add,$edit,$delete);
+        }
+    }
+    else{
+        for ($i=0; $i <count($fns) ; $i++) 
+        { 
+            $userId = $admin_id;
+            $fnId   = $fns[$i]['id'];
+            $v      = 'V'.$fns[$i]['name'];
+            $a      = 'A'.$fns[$i]['name'];
+            $e      = 'E'.$fns[$i]['name'];
+            $d      = 'D'.$fns[$i]['name'];
+            $ii     = $fns[$i]['name'];
+            $id     = $_POST[$ii];
+            $view   = isset($_POST[$v]);
+            $add    = isset($_POST[$a]);
+            $edit   = isset($_POST[$e]);
+            $delete = isset($_POST[$d]);
+            $fileds = array(
+              0 => '_view',
+              1 => '_add',
+              2 => '_edit',
+              3 => '_delete'
+            );
+            $values = array(
+              0 => $view,
+              1 => $add,
+              2 => $edit,
+              3 => $delete
+            );
+            $_admin->update_userUP($fileds,$values,count($values),'id',$id);
+        }
+    } 
+    
+    header("Location: ../edit_users.php");     
+  }
+
 ?>
 
 <? ob_flush(); ?>

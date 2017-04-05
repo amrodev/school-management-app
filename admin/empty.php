@@ -3,6 +3,7 @@
 session_start();
 
 if ($_SESSION['login']) {
+    require_once 'funcs/auth.php';
 
 } else {
     header("Location: index.php");

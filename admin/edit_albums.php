@@ -3,7 +3,11 @@
 session_start();
 
 if ($_SESSION['login']) {
-  
+  require_once 'funcs/auth.php';
+      if($adminEditGal == 0)
+      {
+        header("Location: dashboard.php");
+      }
 }
 else{
   header("Location: index.php");
@@ -76,8 +80,12 @@ else{
                                                     echo '<td class="sorting_1">'.$albums[$i]['id'].'</td>';
                                                     echo '<td>'.$albums[$i]['title_english'].'</td>';
                                                     echo '<td><img width="100" height="80" src="../'.$albums[$i]['photo'].'" /></td>';
-                                                    echo '<td><a href="e_album.php?name='.$id.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a>  
-                                                              <a href="funcs/gallery_functions.php?delete_gallery='.$id.'" class="on-default remove-row"><i class="fa fa-trash-o"></i></a></td>';
+                                                    echo '<td><a href="e_album.php?name='.$id.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a> '; 
+                                                    if($adminDeleteGal == 1)
+                                                    {
+                                                      echo '<a href="funcs/gallery_functions.php?delete_gallery='.$id.'" class="on-default remove-row"><i class="fa fa-trash-o"></i></a></td>';
+                                                    }
+                                                    
                                                     echo '</tr>';
                                                   }
                                                 ?>

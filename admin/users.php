@@ -22,6 +22,11 @@ if ($_SESSION['login']) {
 
     <?php
     require "inc/head.php";
+    require_once 'funcs/auth.php';
+      if($adminVeiwUsers == 0)
+      {
+        header("Location: dashboard.php");
+      }
     ?>
     <?php
     //
@@ -119,9 +124,8 @@ if ($_SESSION['login']) {
                                             <label for="cname" class="control-label col-lg-2">User Level</label>
                                             <div class="col-lg-10">
                                                 <select class="form-control" id="level" name="level">
-                                                    <option>Super Admin</option>
-                                                    <option>Website Admin</option>
-                                                    <option>Parent</option>
+                                                    <option value ="1">Super Admin</option>
+                                                    <option value ="2">Admin</option>
                                                 </select>
                                             </div>
                                         </div>

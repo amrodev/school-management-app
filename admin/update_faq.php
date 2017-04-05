@@ -15,6 +15,11 @@ if ($_SESSION['login']) {
   $search_by = 'id';
   $value = $id; 
   $faq = $_faq->get_faqdata($search_by,$value); 
+  require_once 'funcs/auth.php';
+      if($adminVeiwFAQ == 0)
+      {
+        header("Location: dashboard.php");
+      }
   
 }
 else{

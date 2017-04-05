@@ -3,7 +3,11 @@
 session_start();
 
 if ($_SESSION['login']) {
-  
+      require_once 'funcs/auth.php';
+      if($adminVeiwGal == 0)
+      {
+        header("Location: dashboard.php");
+      }
 }
 else{
   header("Location: index.php");
@@ -30,9 +34,17 @@ else{
             <!-- Start content -->
             <div class="content">
                 <div class="container">
+                  <?php
+                  if($adminAddGal == 1)
+                  {
+                    echo '<a href="album.php" class="btn btn-success btn-rounded waves-effect waves-light m-b-5">Add Album</a>';
+                  }
+                  if($adminEditGal == 1){
+                    echo '<a href="edit_albums.php" class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">Edit Albums</a>';
+                  } 
+                  ?>
                   
-                  <a href="album.php" class="btn btn-success btn-rounded waves-effect waves-light m-b-5">Add Album</a>
-                  <a href="edit_albums.php" class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">Edit Albums</a><br><br>
+                  <br><br>
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="portfolioFilter">

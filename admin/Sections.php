@@ -4,6 +4,12 @@ session_start();
 
 if ($_SESSION['login']) {
 
+    require_once 'funcs/auth.php';
+      if($adminVeiwSec == 0)
+      {
+        header("Location: dashboard.php");
+      }
+
 }
 else{
   header("Location: index.php");
@@ -260,8 +266,14 @@ else{
                                         </button>
 
                                             <br><br><br><br>
-
-                                                <button class="btn btn-success waves-effect waves-light" name="select_section" id="select_section" type="submit">Save</button>
+                                               <?php 
+                                               if($adminAddSec == 1)
+                                               {
+                                                echo '<button class="btn btn-success waves-effect waves-light" name="select_section" id="select_section" type="submit">Save</button>';
+                                               }
+                                               
+                                               ?>
+                                                
 
                                 </div>
                             </div>

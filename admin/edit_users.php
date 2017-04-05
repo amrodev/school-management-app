@@ -27,13 +27,24 @@ else{
       require "inc/head.php";
       require "inc/top_bar.php";
       require "inc/left_bar.php";
+      require_once 'funcs/auth.php';
+      if($adminVeiwUsers == 0)
+      {
+        header("Location: dashboard.php");
+      }
     ?>
          <div class="content-page">
             <!-- Start content -->
             <div class="content">
                 <div class="container">
                     <!-- Page-Title -->
-                  <a href="users.php" class="btn btn-primary waves-effect waves-light btn-lg m-b-5"><i class="md md-my-library-add"></i> Add User</a>
+                    <?php 
+                      if($adminAddUsers == 1)
+                      {
+                        echo '<a href="users.php" class="btn btn-primary waves-effect waves-light btn-lg m-b-5"><i class="md md-my-library-add"></i> Add User</a>';
+                      }
+                    ?>
+                  
                   <br><br>
                     <!-- Pls Remove -->
                     <div class="panel">
@@ -54,7 +65,6 @@ else{
                                   </thead>
                                   <tbody>
                                     <?php
-                                    require 'lib/admin.php';
   require 'lib/user_actions.php';
 
   $_admin   = new Admin();
@@ -74,7 +84,7 @@ else{
                                             $level = 'Super Admin';
                                             break;
                                           case '2':
-                                            $level = 'Website Admin';
+                                            $level = 'Admin';
                                             break;
                                           case '3':
                                             $level = 'Student';
@@ -91,36 +101,76 @@ else{
                                             break;
                                         }
 
-                                        if ($level != 'mips') 
-                                        {
+                                        
                                           $enc_id = $_enc->encode($admins[$i]['admin_id']); 
                                           echo '<tr class="gradeA odd" role="row">';
-                                          echo '<td class="sorting_1">'.$admins[$i]['admin_username'].'</td>';
+                                          echo '<td class="sorting_1"><a href="user_privileges.php?u='.$enc_id.'">'.$admins[$i]['admin_username'].'</a></td>';
                                           echo '<td>'.$admins[$i]['admin_email'].'</td>';
                                           echo '<td>'.$level.'</td>';
                                           echo '<td class="actions">';
                                           $actions = $_actions->get_actions('username',$admins[$i]['admin_username']);
                                           if (!empty($actions)) 
                                           {
-                                            echo '<a href="update_user.php?user_name='.$enc_id.'"><i class="fa fa-pencil"></i></a>';
-                                            if ($admins[$i]['suspended'] == 0) 
+                                            if($adminEditUsers == 0)
+                                            {
+                                              
+                                            }
+                                            else{
+                                               echo '<a href="update_user.php?user_name='.$enc_id.'"><i class="fa fa-pencil"></i></a>';
+                                               if ($admins[$i]['suspended'] == 0) 
                                             {
                                               echo '<a href="funcs/user_functions.php?sus='.$enc_id.'"><i class="md md-block"></i></a>';
+                                              
                                             }
                                             else
                                             {
                                               echo '<a href="funcs/user_functions.php?unsus='.$enc_id.'"><i class="ion-play"></i></a>';
+                                              
                                             }
+                                            }
+
+                                            if($adminDeleteUsers == 0)
+                                            {
+                                              
+                                            }
+                                            else{
+                                               echo '<a href="funcs/user_functions.php?del_name='.$enc_id.'" ><i class="fa fa-trash-o"></i></a>';
+                                               if ($admins[$i]['suspended'] == 0) 
+                                            {
+                                              echo '<a href="funcs/user_functions.php?sus='.$enc_id.'"><i class="md md-block"></i></a>';
+                                              
+                                            }
+                                            else
+                                            {
+                                              echo '<a href="funcs/user_functions.php?unsus='.$enc_id.'"><i class="ion-play"></i></a>';
+                                              
+                                            }
+                                            }      
+                                            
                                           }
                                           else
                                           {
-                                            echo '<a href="update_user.php?user_name='.$enc_id.'"><i class="fa fa-pencil"></i></a>';
-                                            echo '<a href="funcs/user_functions.php?del_name='.$enc_id.'" ><i class="fa fa-trash-o"></i></a>';
+                                            if($adminEditUsers == 0)
+                                            {
+                                              
+                                            }
+                                            else{
+                                               echo '<a href="update_user.php?user_name='.$enc_id.'"><i class="fa fa-pencil"></i></a>';
+                                            }
+
+                                            if($adminDeleteUsers == 0)
+                                            {
+                                              
+                                            }
+                                            else{
+                                               echo '<a href="funcs/user_functions.php?del_name='.$enc_id.'" ><i class="fa fa-trash-o"></i></a>';
+                                            }                                            
+                                            
                                           }
                                           echo '</td>';
                                           echo '</tr>';
                                         }
-                                      }
+                                      
                                         
                                         //var_dump($actions);
                                         

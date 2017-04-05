@@ -164,10 +164,34 @@ ini_set('session.bug_compat_42', 0);
    $title_english = $_POST['title_english'];
    $title_arabic  = $_POST['title_arabic'];
    $section       = $_POST['section'];
-   $id            = $_SESSION['album_id'];
-   if (isset($_FILES["photo"]["name"])) 
+   $id            = $_GET['id'];
+   if ($_FILES["photo"]["error"] == 4) 
    {
-      $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      $fileds = array(
+           0 => 'title_english',
+           1 => 'title_arabic',
+           2 => 'section'
+        );
+      $values = array(
+           0 => $title_english,
+           1 => $title_arabic,
+           2 => $section
+        );
+      $counter = count($values);
+      $select = 'id';
+      $_gallery->update($fileds,$values,$counter,$select,$id);   
+      $fileds1 = array(
+           0 => 'album_section'
+        );
+      $values1 = array(
+           0 => $section
+        );
+        $counter = count($values1);
+      $_gallery->updatePhoto($fileds1,$values1,$counter,'AlbumID',$id);
+   }
+   else
+   {
+       $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       $rand_dir_name = substr(str_shuffle($chars), 0, 15);
       mkdir("../../wp_uploads/albums/$rand_dir_name");
       move_uploaded_file(@$_FILES["photo"]["tmp_name"],"../../wp_uploads/albums/$rand_dir_name/".$_FILES["photo"]["name"]);
@@ -189,22 +213,14 @@ ini_set('session.bug_compat_42', 0);
       $counter = count($values);
       $select = 'id';
       $_gallery->update($fileds,$values,$counter,$select,$id);
-   }
-   else
-   {
-      $fileds = array(
-           0 => 'title_english',
-           1 => 'title_arabic',
-           2 => 'section'
+      $fileds1 = array(
+           0 => 'album_section'
         );
-      $values = array(
-           0 => $title_english,
-           1 => $title_arabic,
-           2 => $section
+      $values1 = array(
+           0 => $section
         );
-      $counter = count($values);
-      $select = 'id';
-      $_gallery->update($fileds,$values,$counter,$select,$id);    
+        $counter = count($values1);
+      $_gallery->updatePhoto($fileds1,$values1,$counter,'AlbumID',$id);
    }
 
    $_user_action = new User_actions();

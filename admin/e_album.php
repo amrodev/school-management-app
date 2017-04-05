@@ -12,8 +12,13 @@ if ($_SESSION['login']) {
     $id = $_enc->decode($enc_id);
     $select = '*';
     $where = ' id=' . $id;
-    $album = $_album->get_by_where($select, $where);
+    $album = $_album->get_by_where('id',$id);
     $_SESSION['album_id'] = $id;
+    require_once 'funcs/auth.php';
+      if($adminEditGal == 0)
+      {
+        header("Location: dashboard.php");
+      }
 
 } else {
     header("Location: index.php");
@@ -51,7 +56,7 @@ if ($_SESSION['login']) {
                                 <div class="form">
                                     <form class="cmxform form-horizontal tasi-form" id="update_album"
                                           name="update_album" method="post" enctype="multipart/form-data"
-                                          action="funcs/gallery_functions.php" novalidate="novalidate">
+                                          action="funcs/gallery_functions.php?id=<?php echo $id;?>" novalidate="novalidate">
 
                                         <div class="form-group">
                                             <label for="cname" class="control-label col-lg-2">Album Name</label>

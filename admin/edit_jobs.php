@@ -13,7 +13,12 @@ if ($_SESSION['login']) {
   $_SESSION['job_id'] = $_GET['job_name'];
   $search_by = 'id';
   $value = $id; 
-  $jobs = $_jobs->get_jobdata($search_by,$value); 
+  $jobs = $_jobs->get_jobdata($search_by,$value);
+  require_once 'funcs/auth.php';
+      if($adminVeiwJob == 0)
+      {
+        header("Location: dashboard.php");
+      } 
 }
 else{
   header("Location: index.php");

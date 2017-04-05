@@ -4,7 +4,11 @@ session_start();
 
 if ($_SESSION['login']) 
 {
-  
+      require_once 'funcs/auth.php';
+      if($adminVeiwFAQ == 0)
+      {
+        header("Location: dashboard.php");
+      }
   
 }
 else{
@@ -33,7 +37,13 @@ else{
             <div class="content">
                 <div class="container">
                     <!-- Page-Title -->
-                  <a href="FAQ.php" class="btn btn-primary waves-effect waves-light btn-lg m-b-5">Add FAQ</a>
+                    <?php 
+                     if($adminAddFAQ == 1)
+                     {
+                       echo '<a href="FAQ.php" class="btn btn-primary waves-effect waves-light btn-lg m-b-5">Add FAQ</a>';
+                     }
+                    ?>
+                  
                   <br><br>
                     <!-- Pls Remove -->
                     <div class="panel">
@@ -72,8 +82,16 @@ else{
                                         echo '<td>'.$faqs[$i]['category'].'</td>';
                                         
                                         echo '<td class="actions">';
-                                        echo '<a href="update_faq.php?faq_name='.$enc_id.'"><i class="fa fa-pencil"></i></a>';
-                                        echo '<a href="funcs/faq_functions.php?del_name='.$enc_id.'" ><i class="fa fa-trash-o"></i></a>';
+                                        if($adminEditFAQ == 1)
+                                        {
+                                           echo '<a href="update_faq.php?faq_name='.$enc_id.'"><i class="fa fa-pencil"></i></a>';
+                                        }
+                                        if($adminDeleteFAQ == 1)
+                                        {
+                                          echo '<a href="funcs/faq_functions.php?del_name='.$enc_id.'" ><i class="fa fa-trash-o"></i></a>';
+                                        }
+                                       
+                                        
                                         echo '</td>';
                                         echo '</tr>';                                        
                                       } 

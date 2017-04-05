@@ -448,6 +448,21 @@ class Database{
             $this->close_connection();
             
           }
+          else if ($OnStatement == "") {
+            $q = "SELECT ".$selects." FROM ".$table1." INNER JOIN ".$table2. " WHERE ".$WhereStatement; 
+            $query = mysql_query($q);
+            while ($row = mysql_fetch_array($query)) 
+            {   
+              $r[$i] = $row;
+              $i++;                                                
+            } 
+            if (isset($r)) 
+            {
+              return $r;          
+            }   
+            $this->close_connection();
+            
+          }
           else{
             $q = "SELECT ".$selects." FROM ".$table1." INNER JOIN ".$table2. " ON ".$OnStatement." WHERE ".$WhereStatement; 
             $query = mysql_query($q);

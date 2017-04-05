@@ -13,7 +13,12 @@ if ($_SESSION['login']) {
   $search_by = 'id';
   $_SESSION['message_id'] =  $id;
   $value = $id; 
-  $sms = $_sms->get_SmsMessageData($search_by,$value); 
+  $sms = $_sms->get_SmsMessageData($search_by,$value);
+  require_once 'funcs/auth.php';
+      if($adminVeiwSMS == 0)
+      {
+        header("Location: dashboard.php");
+      } 
 }
 else{
   header("Location: index.php");

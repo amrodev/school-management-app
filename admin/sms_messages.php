@@ -3,7 +3,11 @@
 session_start();
 
 if ($_SESSION['login']) {
-
+require_once 'funcs/auth.php';
+      if($adminVeiwSMS == 0)
+      {
+        header("Location: dashboard.php");
+      }
 } else {
     header("Location: index.php");
 
